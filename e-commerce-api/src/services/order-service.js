@@ -4,6 +4,8 @@ const orderService = {}
 
 orderService.createOrder = data => prisma.orders.create({ data })
 orderService.findByUserId = userId => prisma.orders.findMany({ where: { userId: userId } })
+orderService.findById = orderId => prisma.orders.findFirst({ where: { id: orderId } })
+orderService.getAll = () => prisma.order_items.findMany()
 
 module.exports = orderService
 

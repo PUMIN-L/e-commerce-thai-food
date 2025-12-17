@@ -3,7 +3,7 @@ import Button from "../../../components/Button";
 import Modal from "../../../components/Modal";
 
 export default function SeeAllOrder() {
-
+    // ยังไม่ได้ใช้
     const [openAllOrder, setOpenAllOrder] = useState(false)
 
     return (<>
@@ -19,3 +19,4 @@ export default function SeeAllOrder() {
         </Modal>
     </>)
 }
+

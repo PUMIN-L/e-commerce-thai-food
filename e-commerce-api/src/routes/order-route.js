@@ -8,10 +8,9 @@ const orderRouter = express.Router()
 
 orderRouter.post('/create', authenticate, createOrderValidator, orderController.create)
 orderRouter.get('/getAll', authenticate)
-orderRouter.get('/getById/:id', authenticate, orderController.getByUserId)
-// orderRouter.patch('/updateOrder', authenticate)
-// orderRouter.delete('/deleteById', authenticate)
-
+orderRouter.get('/getByUserId/', authenticate, orderController.getByUserId)
+orderRouter.get('/getById/:orderId', authenticate, orderController.getById)
+orderRouter.get('/getAll', authenticate, orderController.getAll)
 
 module.exports = orderRouter
 

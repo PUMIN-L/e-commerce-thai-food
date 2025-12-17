@@ -11,3 +11,23 @@
  
 }
 
+@layer utilities {
+  .scrollbar-custom::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .scrollbar-custom::-webkit-scrollbar-track {
+    background: #e5e7eb; /* gray-200 */
+  }
+
+  .scrollbar-custom::-webkit-scrollbar-thumb {
+    background-color: #22c55e; /* green-500 */
+    border-radius: 9999px;
+  }
+
+  /* Firefox */
+  .scrollbar-custom {
+    scrollbar-width: thin;
+    scrollbar-color: #e5e7eb #101828;
+  }
+}

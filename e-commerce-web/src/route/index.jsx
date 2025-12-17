@@ -21,7 +21,6 @@ const router = createBrowserRouter([
             </ProductProtectedRoute>),
         children: [
             { path: '/', element: <Homepage /> },
-            { path: '/menu', element: <MenuPage /> },
             { path: '/setting', element: <ProtectedRouteIsAdmin><Setting /></ProtectedRouteIsAdmin> },
             { path: '/menu', element: <ProductProtectedRoute><MenuPage /></ProductProtectedRoute> },
             { path: '/contactus', element: <h1 className="mt-40">contactus page</h1> },

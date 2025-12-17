@@ -1,15 +1,10 @@
 import CreateOrderForm from "./CreateOrderForm";
-import OrderContainer from "./OrderContainer";
-
-
 
 export default function OrderPageContainer() {
     return (
         <>
             <div className="mt-32 z-10 h-[25rem] bg-gray-200 opacity-90  
             flex justify-center items-center flex-col rounded-2xl">
-
-                {/* <OrderContainer /> */}
                 <CreateOrderForm />
             </div>
 

@@ -15,9 +15,8 @@ export default function CreateOrderForm() {
     const navigate = useNavigate()
 
     const { authUser } = useAuth()
-    const { createOrder, setCreateOrder } = useOrder()
-    // "PROCESSING" = "Order received"
-    // "PENDING" = "Pending payment"
+    const { createOrder, setCreateOrder, setOrdersByUser, ordersByUser } = useOrder()
+
     const orderInit = {
         userId: authUser?.id,
         totalPrice: 0,
@@ -51,6 +50,7 @@ export default function CreateOrderForm() {
             const resCreateOrder = await orderApi.create(order)
 
             if (resCreateOrder) {
+                setOrdersByUser([resCreateOrder.data, ...ordersByUser])
                 const orderItems = createOrder.reduce((itemOrder, item) => {
                     const formObject = {
                         "orderId": resCreateOrder.data.id,
@@ -65,9 +65,11 @@ export default function CreateOrderForm() {
                     await orderItemApi.create(orderItems[item])
                 }
             }
+
+
             toast.success('Created Order')
             setCreateOrder([])
-            navigate('/menu') //เปลี่ยนไปหน้า ดูรายการ order
+            navigate('/your-order')
         } catch (error) {
             console.log(error)
         }
