@@ -1,7 +1,7 @@
 const createError2 = require("../utils/create-error2");
 const { loginSchema, registerSchema } = require("../validators/auth-validator");
 const { createOrderItemSchema } = require("../validators/orderItem-validator");
-const { createOrderSchema } = require("../validators/order-validator");
+const { createOrderSchema, updateOrderSchema } = require("../validators/order-validator");
 
 
 const validators = schema => {
@@ -28,3 +28,4 @@ exports.validateUpdateProfileImage = (req, res, next) => {
 
 exports.createOrderValidator = validators(createOrderSchema)
 exports.createOrderItemValidator = validators(createOrderItemSchema)
+exports.updateOrderValidator = validators(updateOrderSchema)

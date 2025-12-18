@@ -36,7 +36,7 @@ export default function ItemOrderCard({ information }) {
 
     const handleClickRemove = () => {
         const newOrders = createOrder.filter(item => item.id !== information.id)
-        console.log(newOrders)
+
         setCreateOrder(newOrders)
     }
 

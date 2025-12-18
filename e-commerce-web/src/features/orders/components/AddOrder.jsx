@@ -16,9 +16,7 @@ export default function AddOrder({ e, onClose }) {
     const isAlreadyHaveItem = createOrder.filter(item => item.id === e.id)
 
     useEffect(() => {
-        // console.log('createOrder')
-        console.log(createOrder)
-        // console.log('createOrder')
+
         if (isAlreadyHaveItem[0]) {
             setAmount(isAlreadyHaveItem[0].amount)
         }

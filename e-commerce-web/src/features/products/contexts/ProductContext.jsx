@@ -27,10 +27,10 @@ export default function ProductContextProvider({ children }) {
 
 
     const createProduct = async (formdata) => {
-        console.log(allProduct)
+
         const res = await productApi.createProduct(formdata)
         setAllProduct(prev => [...prev, res.data])
-        console.log(allProduct)
+
     }
 
     const deleteProduct = async id => {

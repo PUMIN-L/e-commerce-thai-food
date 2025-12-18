@@ -85,13 +85,7 @@ authController.updateProfileImage = async (req, res, next) => {
         if (user.publicId) {
             await removePictureService.remove(user.publicId)
         }
-        // console.log("///////////////////")
-        // console.log(req.file)
-        // console.log("///////////////////")
-        // console.log(req.files)
-        // console.log("*****************")
-        // console.log(req.body)
-        // console.log("++++++++++++++++")
+
         if (req.files.picture) {
             const { secure_url, public_id } = await uploadService.upload(req.files.picture[0].path)
 

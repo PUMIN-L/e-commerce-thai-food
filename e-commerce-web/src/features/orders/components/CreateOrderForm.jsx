@@ -44,6 +44,10 @@ export default function CreateOrderForm() {
     const handleClickOrderNow = async () => {
         try {
 
+            if (!authUser) {
+                return toast.warn('Please sign in before you can place an order.')
+            }
+
             if (!paymentMethod) {
                 return toast.warn('Please select a payment method')
             }

@@ -52,7 +52,7 @@ export default function EditMenuForm({ onSuccess, backToSelectForm }) {
 
             const formData = new FormData()
             if (file) {
-                console.log('have file')
+
                 formData.append('imageUrl', file)
             }
 
@@ -71,7 +71,7 @@ export default function EditMenuForm({ onSuccess, backToSelectForm }) {
             setLoading(false)
             toast.success("Menu Updated ")
             setSelectedForEditAfterSuccess()
-            console.log(allProduct[0])
+
         } catch (error) {
             console.log(error)
             toast.error(error.message)

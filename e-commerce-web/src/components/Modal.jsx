@@ -53,7 +53,7 @@ export default function Modal({ onClose, open, children, title, bg, textColor })
 
             </div>
 
-        </>, document.getElementById('modal')) : null}
+        </>, document.getElementById('modal')) : ""}
 
     </>)
 }

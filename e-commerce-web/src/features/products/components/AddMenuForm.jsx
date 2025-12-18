@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 
 const initialInput = {
     name: '',
-    price: null,
+    price: '',
     categoryName: '',
     description: '',
 }
@@ -31,7 +31,7 @@ export default function AddMenuForm({ onSuccess }) {
 
     const [input, setInput] = useState(initialInput)
     const [inputError, setInputError] = useState(initialInputError)
-    const [file, setFile] = useState(null)
+    const [file, setFile] = useState('')
     const [loaging, setLoading] = useState(false)
 
     const handleChangeInput = e => {

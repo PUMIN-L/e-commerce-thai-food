@@ -7,10 +7,17 @@ const menuList = [
     { id: 2, message: "MENU", to: "/menu" },
     { id: 3, message: "CONTACT US", to: "/contactus" },
     { id: 4, message: "SEE ORDER", to: "/your-order" },
-    { id: 5, message: "SETTING", to: "/setting" },
+    { id: 5, message: <div className="w-8 m-0 p-0"><BasketIcon /></div>, to: "/orders" },
+    { id: 6, message: "SETTING", to: "/setting" },
 ]
 
-
+const menuListForUser = [
+    { id: 1, message: "HOME", to: "/" },
+    { id: 2, message: "MENU", to: "/menu" },
+    { id: 3, message: "CONTACT US", to: "/contactus" },
+    { id: 4, message: "SEE ORDER", to: "/your-order" },
+    { id: 5, message: <div className="w-8 m-0 p-0"><BasketIcon /></div>, to: "/orders" },
+]
 
 export default function Menu() {
 
@@ -18,13 +25,7 @@ export default function Menu() {
 
     const { authUser } = useAuth()
 
-    const menuListForUser = [
-        { id: 1, message: "HOME", to: "/" },
-        { id: 2, message: "MENU", to: "/menu" },
-        { id: 4, message: "CONTACT US", to: "/contactus" },
-        { id: 3, message: "SEE ORDER", to: "/your-order" },
-        { id: 5, message: <div className="w-8 m-0 p-0"><BasketIcon /></div>, to: "/orders" },
-    ]
+
 
     const list = authUser?.roleId === 2 ? menuList : menuListForUser
 
