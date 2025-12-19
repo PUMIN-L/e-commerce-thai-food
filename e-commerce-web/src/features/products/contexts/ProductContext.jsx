@@ -35,7 +35,9 @@ export default function ProductContextProvider({ children }) {
 
     const deleteProduct = async id => {
 
-        const result = await productApi.delete(id)
+        const body = { id }
+
+        const result = await productApi.delete(body)
 
         const allProductAfterDelete = allProduct.filter(item => {
             if (item.id !== result.data.id) {

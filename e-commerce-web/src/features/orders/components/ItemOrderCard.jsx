@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import EditAmountOrder from "./EditAmountOrder"
 import useOrder from "../hook/useOrder"
 import Button from "../../../components/Button"
+import thaiFood from "../../../assets/thaiFood.jpg"
 
 export default function ItemOrderCard({ information }) {
 
@@ -45,7 +46,7 @@ export default function ItemOrderCard({ information }) {
 
         <div className="flex justify-center items-center gap-6 mt-2  p-2 shadow-lg rounded-lg bg-gray-900 ">
             <div className="h-15 w-15 mx-3">
-                <img src={information.imageUrl} alt="food image" className="w-full h-full object-cover border-2  rounded-2xl" />
+                <img src={information.imageUrl || thaiFood} alt="food image" className="w-full h-full object-cover border-2  rounded-2xl" />
             </div>
 
             <div className="ml-[-1rem] flex flex-col flex-1">

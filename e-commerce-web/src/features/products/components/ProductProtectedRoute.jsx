@@ -2,12 +2,12 @@ import Spinner from "../../../components/Spinner"
 import useProduct from "../hook/useProduct"
 
 export default function ProductProtectedRoute({ children }) {
-    const { isProductLoading } = useProduct()
+    // const { isProductLoading } = useProduct()
 
 
     return (
         <>
-            {isProductLoading && <Spinner />}
+            {/* {isProductLoading && <Spinner />} */}
             {children}
         </>
     )

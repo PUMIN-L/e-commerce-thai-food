@@ -15,11 +15,12 @@ export default function Setting() {
 
     return <>
 
-        <div className="mt-36 z-10 h-[30rem] bg-black opacity-90 flex justify-center items-center flex-col gap-5 rounded-2xl">
+        <div className="mt-36 z-10 h-[23rem] bg-black 
+        opacity-90 flex justify-center items-center flex-col gap-5 rounded-2xl xl:h-[30rem]">
 
             <div>
                 <Button
-                    onClick={() => setOpenAddMenu(prev => !prev)}
+                    onClick={() => setOpenAddMenu(true)}
                     bg="green"
                 >
                     Add New Menu +
@@ -37,7 +38,7 @@ export default function Setting() {
 
             <div>
                 <Button
-                    onClick={() => setOpenEdit(prev => !prev)}
+                    onClick={() => setOpenEdit(true)}
                 >
                     Edit Menu
                 </Button>
@@ -52,7 +53,7 @@ export default function Setting() {
 
             <div>
                 <Button
-                    onClick={() => setOpenDeleteMenu(prev => !prev)}
+                    onClick={() => setOpenDeleteMenu(true)}
                     bg="red"
                 >
                     Delete Menu -

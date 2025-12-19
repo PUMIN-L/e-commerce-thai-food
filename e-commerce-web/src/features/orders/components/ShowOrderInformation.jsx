@@ -7,6 +7,8 @@ import orderItemApi from "../../../apis/orderItemApi";
 import useAuth from "../../../hook/useAuth";
 import { toast } from "react-toastify";
 import useOrder from "../hook/useOrder";
+import Modal from "../../../components/Modal";
+import ConfirmDelete from "./ConfirmDelete";
 
 
 export default function ShowOrderInformation({ order, onClose }) {
@@ -17,6 +19,7 @@ export default function ShowOrderInformation({ order, onClose }) {
     const [orderItems, setOrderItems] = useState(null)
     const [isEdit, setIsEdit] = useState(false)
     const [editValue, setEditValue] = useState({})
+    const [openConfirmDelete, setOpenConfirmDelete] = useState(false)
 
     useEffect(() => {
         const getOrderItems = async () => {
@@ -48,17 +51,6 @@ export default function ShowOrderInformation({ order, onClose }) {
     const findOption = (options, value) =>
         options.find(opt => opt.value === value) || null;
 
-    const handalClickEdit = () => {
-        setIsEdit(true)
-    }
-
-    const handalClickDelete = async () => {
-
-        await deleteOrder(order.id)
-        toast.success(`Deleted order number ${order.id}`)
-        onClose()
-    }
-
     const handalClickSave = async () => {
 
         if (Object.keys(editValue).length < 1) {
@@ -74,6 +66,27 @@ export default function ShowOrderInformation({ order, onClose }) {
     }
 
 
+    const handalClickEdit = () => {
+        setIsEdit(true)
+    }
+
+    const handalClickDelete = async () => {
+        setOpenConfirmDelete(true)
+    }
+
+    const deleteFunction = async () => {
+        try {
+            await deleteOrder(order.id)
+            toast.success(`Deleted order number ${order.id}`)
+            setOpenConfirmDelete(false)
+        } catch (error) {
+            console.log(error)
+        }
+
+    }
+
+
+
     return (<>
         <div className="flex gap-8 bg-gray-900 rounded-lg pr-5 pb-10 ">
             <div className="flex flex-col max-h-80 justify-start items-start mt-5 
@@ -85,7 +98,7 @@ export default function ShowOrderInformation({ order, onClose }) {
             </div>
             <div className="pt-10 text-white w-[15rem] ">
 
-                <h1 >Order number : <small className="text-orange-500 font-bold">{order.id}</small></h1>
+                <h1 >Order number : <small className="text-orange-500 font-bold text-[1rem]">{order.id}</small></h1>
 
                 <div className="flex items-center justify-start "><p className="min-w-26">Order status :</p> {isEdit ?
                     <Select
@@ -123,6 +136,16 @@ export default function ShowOrderInformation({ order, onClose }) {
                             {!isEdit && <Button width={40} bg="yellow" onClick={handalClickEdit}>Edit</Button>}
                             {isEdit && <Button width={40} bg="green" onClick={handalClickSave}>Save</Button>}
                             {!isEdit && <Button width={40} bg="red" onClick={handalClickDelete}>delete</Button>}
+                            <Modal
+                                onClose={() => setOpenConfirmDelete(false)}
+                                open={openConfirmDelete}
+                                title={`Confirm delete order  No.${order.id}`}
+                            >
+                                <ConfirmDelete
+                                    deleteFunction={deleteFunction}
+                                    clickCancle={setOpenConfirmDelete}
+                                />
+                            </Modal>
                         </div>
                         }
 

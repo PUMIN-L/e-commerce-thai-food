@@ -8,6 +8,7 @@ import ProductProtectedRoute from "../features/products/components/ProductProtec
 import ProtectedRouteIsAdmin from "../features/althentication/components/ProtectedRouteIsAdmin"
 import OrdersPage from "../pages/OrdersPage"
 import SeeOrderPage from "../pages/SeeOrderPage"
+import ContectUs from "../pages/contactus"
 
 
 
@@ -23,7 +24,7 @@ const router = createBrowserRouter([
             { path: '/', element: <Homepage /> },
             { path: '/setting', element: <ProtectedRouteIsAdmin><Setting /></ProtectedRouteIsAdmin> },
             { path: '/menu', element: <ProductProtectedRoute><MenuPage /></ProductProtectedRoute> },
-            { path: '/contactus', element: <h1 className="mt-40">contactus page</h1> },
+            { path: '/contactus', element: <ContectUs /> },
             { path: '/your-order', element: <SeeOrderPage /> },
             { path: '/orders', element: <OrdersPage /> },
         ]

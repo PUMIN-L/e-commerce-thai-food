@@ -5,7 +5,7 @@ import validateWith from '../../../../utils/handle-varidate'
 const createProductSchema = Joi.object({
     name: Joi.string(),
     price: Joi.string(),
-    categoryName: Joi.string().allow(null, ''),
+    categoryName: Joi.string(),
     description: Joi.string().allow(null, ''),
 })
 

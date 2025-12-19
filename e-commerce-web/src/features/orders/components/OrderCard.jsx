@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import productApi from "../../../apis/productApi"
 import Spinner from "../../../components/Spinner"
-import foodPicture from "../../../assets/foodPicture.jpg"
+import foodPicture from "../../../assets/thaiFood.jpg"
 
 
 export default function OrderCard({ information }) {

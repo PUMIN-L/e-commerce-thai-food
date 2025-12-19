@@ -137,8 +137,8 @@ export default function EditMenuForm({ onSuccess, backToSelectForm }) {
                         />
 
                         <div className=" w-full ">
-                            <div class="max-w-sm mx-auto">
-                                <div class=" rounded-xl overflow-hidden shadow-lg cursor-pointer">
+                            <div className="max-w-sm mx-auto">
+                                <div className=" rounded-xl overflow-hidden shadow-lg cursor-pointer">
                                     <Avatar
                                         src={file ? URL.createObjectURL(file) : product?.imageUrl || blankImage}
                                         onClick={() => fileEl.current.click()}

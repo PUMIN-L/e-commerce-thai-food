@@ -7,6 +7,9 @@ import useProduct from '../hook/useProduct'
 import Button from '../../../components/Button'
 import Spinner from '../../../components/Spinner'
 import { toast } from 'react-toastify'
+import Modal from '../../../components/Modal'
+import ConfirmDelete from '../../orders/components/ConfirmDelete'
+import thaiFood from '../../../assets/thaiFood.jpg'
 
 export default function DeleteMenuForm() {
 
@@ -16,6 +19,7 @@ export default function DeleteMenuForm() {
     const [selected, setSelected] = useState(products[0])
     const [deleteButton, setDeleteButton] = useState(false)
     const [loadingForDelete, setLoadingForDelete] = useState(false)
+    const [openConfirmDelete, setOpenConfirmDelete] = useState(false)
 
     const handleOnChange = e => {
         if (e.id !== 0) {
@@ -25,10 +29,17 @@ export default function DeleteMenuForm() {
     }
 
     const handleClickDelete = async () => {
+        setOpenConfirmDelete(true)
+    }
+
+    const deleteFunction = async () => {
         try {
+            setOpenConfirmDelete(false)
             setLoadingForDelete(true)
             const id = selected.id
+
             await deleteProduct(id)
+
             const afterDelete = products.filter(item => {
                 if (item.id !== id) {
                     return item
@@ -36,24 +47,20 @@ export default function DeleteMenuForm() {
             })
             setProducts(afterDelete)
             setSelected(products[0])
-
         } catch (error) {
             console.log(error)
         } finally {
             setDeleteButton(false)
-            setLoadingForDelete(prev => (false))
+            setLoadingForDelete(false)
             toast.success("Menu deleted")
         }
-
+        return true
     }
 
     const handleClickCencle = () => {
         setSelected(products[0])
         setDeleteButton(false)
     }
-
-
-
 
 
     return (<>
@@ -68,7 +75,7 @@ export default function DeleteMenuForm() {
                         <span className="col-start-1 row-start-1 flex items-center gap-3 pr-6 cursor-pointer">
                             <img
                                 alt=""
-                                src={selected.imageUrl}
+                                src={selected.imageUrl || thaiFood}
                                 className="size-10 shrink-0 rounded-lg bg-gray-700 outline -outline-offset-1 outline-white/10"
                             />
                             <span className="block truncate ml-2">No.{selected.id}</span>
@@ -98,7 +105,7 @@ export default function DeleteMenuForm() {
                                         <div className="flex items-center">
                                             <img
                                                 alt=""
-                                                src={menu.imageUrl}
+                                                src={menu.imageUrl || thaiFood}
                                                 className="size-5 shrink-0 rounded-full outline -outline-offset-1 outline-white/10"
                                             />
                                             <span className="ml-3 block truncate font-normal group-data-selected:font-semibold">
@@ -124,6 +131,16 @@ export default function DeleteMenuForm() {
         </div >
         {deleteButton && <div className='flex gap-5 mt-3 justify-center'>
             <Button bg="red" onClick={handleClickDelete}>Delete</Button>
+            <Modal
+                onClose={() => setOpenConfirmDelete(false)}
+                open={openConfirmDelete}
+                title={`Confirm delete menu No.${selected.id}`}
+            >
+                <ConfirmDelete
+                    deleteFunction={deleteFunction}
+                    clickCancle={setOpenConfirmDelete}
+                />
+            </Modal>
             <Button bg='yellow' onClick={handleClickCencle} >Cencle</Button>
         </div>}
 

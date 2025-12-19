@@ -9,6 +9,8 @@ export default function ShowCategory() {
         { id: 1, message: "ALL", to: "/menu/?categorie=all" },
         { id: 2, message: "SOUP", to: "/menu/?categorie=soup" },
         { id: 3, message: "CURRY", to: "/menu/?categorie=curry" },
+        { id: 4, message: "STIR-FRY", to: "/menu/?categorie=Stir-fry" },
+        { id: 5, message: "DESSERT", to: "/menu/?categorie=desserts" },
     ]
 
     return (<>

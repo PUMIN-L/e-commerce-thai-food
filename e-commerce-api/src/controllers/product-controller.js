@@ -4,6 +4,7 @@ const uploadService = require("../services/upload-service")
 const createError2 = require("../utils/create-error2")
 const productService = require('../services/product-service')
 const removePictureService = require('../services/remove-picture-service')
+const orderItemService = require('../services/orderItem-service')
 
 
 
@@ -97,17 +98,20 @@ productController.updateById = async (req, res, next) => {
 
 productController.deleteById = async (req, res, next) => {
     try {
+
         if (req.user.roleId !== 2) {
             createError2("This account can't delete product")(401)('user')
         }
-
         const product = await productService.getById(req.body.id)
 
         if (product.publicId) {
             await removePictureService.remove(product.publicId)
         }
 
+        await orderItemService.deleteManyByProductId(req.body.id)
+
         const deletedProduct = await productService.deleteById(req.body.id)
+
         res.status(200).json(deletedProduct)
     } catch (error) {
         next(error)

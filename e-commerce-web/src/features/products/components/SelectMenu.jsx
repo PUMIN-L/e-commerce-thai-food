@@ -4,6 +4,7 @@ import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headless
 import { ChevronUpDownIcon } from '@heroicons/react/16/solid'
 import { CheckIcon } from '@heroicons/react/20/solid'
 import useProduct from '../hook/useProduct'
+import thaiFood from '../../../assets/thaiFood.jpg'
 
 export default function SelectMenu() {
 
@@ -26,7 +27,7 @@ export default function SelectMenu() {
                         <span className="col-start-1 row-start-1 flex items-center gap-3 pr-6 cursor-pointer">
                             <img
                                 alt=""
-                                src={selectedForEdit?.imageUrl}
+                                src={selectedForEdit?.imageUrl || thaiFood}
                                 className="size-10 shrink-0 rounded-lg bg-gray-700 outline -outline-offset-1 outline-white/10"
                             />
                             <span className="block truncate ml-2">No.{selectedForEdit?.id}</span>
@@ -56,7 +57,7 @@ export default function SelectMenu() {
                                         <div className="flex items-center">
                                             <img
                                                 alt=""
-                                                src={menu.imageUrl}
+                                                src={menu.imageUrl || thaiFood}
                                                 className="size-5 shrink-0 rounded-full outline -outline-offset-1 outline-white/10"
                                             />
                                             <span className="ml-3 block truncate font-normal group-data-selected:font-semibold">

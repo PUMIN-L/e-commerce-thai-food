@@ -1,4 +1,5 @@
 import { useRef, useState } from "react"
+import Select from 'react-select'
 import Input from "../../../components/Input"
 import Avatar from "../../althentication/components/Avatar"
 import blankImage from "../../../../src/assets/blankImage.png"
@@ -42,10 +43,10 @@ export default function AddMenuForm({ onSuccess }) {
         try {
             e.preventDefault()
             setLoading(true)
+
             const error = varidateCreateProductSchema(input)
 
             if (error) {
-                console.log(error)
                 setInputError(error)
                 return
             }
@@ -63,19 +64,28 @@ export default function AddMenuForm({ onSuccess }) {
 
             await createProduct(formData)
 
-        } catch (error) {
-            console.log(error)
-            toast.error(error.message)
-        } finally {
             navigate('/menu')
             onSuccess()
             setLoading(false)
             toast.success("Created new menu")
+
+        } catch (error) {
+            console.log(error)
+            toast.error(error.message)
+        } finally {
+            setLoading(false)
         }
+        return true
     }
 
+    const optionsFoodCategory = [
+        { value: "soup", label: "soup" },
+        { value: "curry", label: "curry" },
+        { value: "stir-fry", label: "stir-fry" },
+        { value: "dessert", label: "dessert" },
+    ]
 
-    const classNameP = "w-50 m-auto font-bold text-blue-800"
+    const classNameP = "w-40 m-auto font-bold text-blue-800 "
     return (<div>
         {loaging && <Spinner transparent={true} />}
         <div className="pt-5">
@@ -101,20 +111,30 @@ export default function AddMenuForm({ onSuccess }) {
                         error={inputError.price}
                     />
                 </div>
+                <div className="flex items-center">
+                    <p className={` w-28  font-bold text-blue-800`}>category :</p>
+                    <div>
+                        <Select
+                            options={optionsFoodCategory}
+                            onChange={(e) => { setInput(prev => ({ ...prev, "categoryName": e.value })) }}
+                            placeholder="Input category name"
+                            classNamePrefix=".select-error__control"
+                            className=" mt-2 "
+                            error={inputError.categoryName}
+                        />
+                        {inputError.categoryName && (
+                            <small className="text-red-500 text-sm ">
+                                {inputError.categoryName}
+                            </small>
+                        )}
+                    </div>
 
-                <div className="flex mb-5 ">
-                    <p className={`${classNameP}`}>category name :</p>
-                    <Input
-                        placeholder="Input category name"
-                        value={input.categoryName}
-                        name="categoryName"
-                        onChange={handleChangeInput}
-                        error={inputError.categoryName}
-                    />
                 </div>
 
+
                 <div className="flex mb-5 flex-col gap-2 items-center">
-                    <p className={`${classNameP}  text-center`}>Food Picture</p>
+
+                    <div className={`${classNameP} mt-5`}></div>
 
                     <input type="file" ref={fileEl}
                         className="hidden"
@@ -126,8 +146,8 @@ export default function AddMenuForm({ onSuccess }) {
                     />
 
                     <div className=" w-full ">
-                        <div class="max-w-sm mx-auto">
-                            <div class=" rounded-xl overflow-hidden shadow-lg cursor-pointer">
+                        <div className="max-w-sm mx-auto">
+                            <div className=" rounded-xl overflow-hidden shadow-lg cursor-pointer">
                                 <Avatar
                                     src={file ? URL.createObjectURL(file) : blankImage}
                                     onClick={() => fileEl.current.click()}
@@ -147,7 +167,7 @@ export default function AddMenuForm({ onSuccess }) {
                 <Button onClick={handleClickCreateProduct}>Create Product</Button>
             </div>
         </div>
-    </div>
+    </div >
 
     )
 

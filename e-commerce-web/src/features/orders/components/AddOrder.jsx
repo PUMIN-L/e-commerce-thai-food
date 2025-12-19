@@ -3,6 +3,7 @@ import Button from "../../../components/Button"
 import useOrder from "../hook/useOrder"
 import { toast } from "react-toastify"
 import EditAmountOrder from "./EditAmountOrder"
+import thaiFood from "../../../assets/thaiFood.jpg"
 
 export default function AddOrder({ e, onClose }) {
 
@@ -65,7 +66,8 @@ export default function AddOrder({ e, onClose }) {
     return (<>
         <div className="flex justify-center items-center gap-6 mt-2">
             <div className="h-15 w-15">
-                <img src={e?.imageUrl} alt="food image" className="w-full h-full object-cover border-2  rounded-2xl" />
+                <img src={e?.imageUrl || thaiFood} alt="food image"
+                    className="w-full h-full object-cover  rounded-2xl" />
             </div>
 
             <div>
