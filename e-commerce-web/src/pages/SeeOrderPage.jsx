@@ -13,7 +13,7 @@ export default function SeeOrderPage() {
 
     return (
         <>
-            {loadingOrder && <Spinner />}
+            {loadingOrder && <Spinner transparent={true} />}
             {ordersByUser?.length && authUser?.id ? (
                 <div className="mt-32 z-10 h-[25rem]opacity-90  
             flex justify-start items-center flex-col gap-2 rounded-2xl max-h-120 overflow-auto">

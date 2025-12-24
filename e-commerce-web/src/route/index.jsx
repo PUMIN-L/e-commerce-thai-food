@@ -1,16 +1,16 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
-import MainContainer from "../layouts/MainContainer"
-import Homepage from "../pages/Homepage"
-import MenuPage from "../pages/MenuPage"
-import Setting from "../pages/SettingPage"
-import ProtectedRoute from "../features/althentication/components/ProtectedRoute"
-import ProductProtectedRoute from "../features/products/components/ProductProtectedRoute"
-import ProtectedRouteIsAdmin from "../features/althentication/components/ProtectedRouteIsAdmin"
-import OrdersPage from "../pages/OrdersPage"
-import SeeOrderPage from "../pages/SeeOrderPage"
-import ContectUs from "../pages/contactus"
+import { lazy } from "react"
 
-
+const MainContainer = lazy(() => import("../layouts/MainContainer"))
+const Homepage = lazy(() => import("../pages/Homepage"))
+const MenuPage = lazy(() => import("../pages/MenuPage"))
+const Setting = lazy(() => import("../pages/SettingPage"))
+const ProtectedRoute = lazy(() => import("../features/althentication/components/ProtectedRoute"))
+const ProductProtectedRoute = lazy(() => import("../features/products/components/ProductProtectedRoute"))
+const ProtectedRouteIsAdmin = lazy(() => import("../features/althentication/components/ProtectedRouteIsAdmin"))
+const OrdersPage = lazy(() => import("../pages/OrdersPage"))
+const SeeOrderPage = lazy(() => import("../pages/SeeOrderPage"))
+const ContectUs = lazy(() => import("../pages/contactus"))
 
 const router = createBrowserRouter([
     {

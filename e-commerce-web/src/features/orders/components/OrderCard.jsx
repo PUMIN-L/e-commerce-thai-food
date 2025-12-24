@@ -20,7 +20,7 @@ export default function OrderCard({ information }) {
     }, [])
 
     return (<>
-        {loaging && <Spinner />}
+        {loaging && <Spinner transparent={true} />}
         <div className="flex justify-center items-center gap-6 p-2 px-4 pl-5  bg-gray-900  rounded-lg">
             {<div className="h-15 w-15">
                 <img src={product?.imageUrl || foodPicture} alt="food image" className="w-full h-full object-cover border-2  rounded-2xl" />

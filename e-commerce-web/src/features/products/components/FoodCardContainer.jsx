@@ -39,7 +39,7 @@ export default function FoodCardContainer() {
 
 
 
-                <div className="space-y-4 mt-3 flex justify-center gap-2 flex-wrap ">
+                <div className="space-y-4 mt-3 flex justify-start gap-2 flex-wrap ">
 
                     {allProduct?.map(e => {
                         if (e.id !== 0) {

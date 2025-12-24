@@ -24,7 +24,6 @@ export default function EditMenuForm({ onSuccess, backToSelectForm }) {
     const {
         updateProduct,
         selectedForEdit,
-        allProduct,
         setSelectedForEditAfterSuccess } = useProduct()
 
     const [product, setProduct] = useState(selectedForEdit)
@@ -39,7 +38,6 @@ export default function EditMenuForm({ onSuccess, backToSelectForm }) {
     const handleClickSave = async e => {
         try {
             e.preventDefault()
-
             const error = varidateUpdateProductSchema(product)
 
             if (error) {

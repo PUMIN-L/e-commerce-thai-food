@@ -7,8 +7,7 @@ import { useEffect, useState } from "react";
 import useAuth from "../../../hook/useAuth";
 import orderApi from "../../../apis/orderApi";
 import orderItemApi from "../../../apis/orderItemApi";
-
-
+import Spinner from "../../../components/Spinner";
 
 export default function CreateOrderForm() {
 
@@ -26,11 +25,11 @@ export default function CreateOrderForm() {
 
     const [order, setOrder] = useState(orderInit)
     const [paymentMethod, setPaymentMethod] = useState(null)
+    const [loading, setLoading] = useState(false)
 
 
     useEffect(() => {
         const newTotalPrice = () => {
-
             let totalPrice = 0
             createOrder.map(item => {
                 totalPrice += (item.price * item.amount)
@@ -51,6 +50,7 @@ export default function CreateOrderForm() {
             if (!paymentMethod) {
                 return toast.warn('Please select a payment method')
             }
+            setLoading(true)
             const resCreateOrder = await orderApi.create(order)
 
             if (resCreateOrder) {
@@ -69,13 +69,13 @@ export default function CreateOrderForm() {
                     await orderItemApi.create(orderItems[item])
                 }
             }
-
-
             toast.success('Created Order')
             setCreateOrder([])
             navigate('/your-order')
         } catch (error) {
             console.log(error)
+        } finally {
+            setLoading(false)
         }
 
     }
@@ -85,50 +85,52 @@ export default function CreateOrderForm() {
         toast.success('Deleted Order')
     }
 
-    return (<>{
-        createOrder[0] ? (<div className="flex h-[20rem]   shadow-lg  rounded-lg">
-            <div className="  overflow-auto px-3 ">
-                {createOrder.map(e => {
-                    return <ItemOrderCard information={e} key={e.id} />
-                })}
+    return (<>
+        {loading && <Spinner transparent={true} />}
+        {
+            createOrder[0] ? (<div className="flex h-[20rem]   shadow-lg  rounded-lg">
+                <div className="  overflow-auto px-3 ">
+                    {createOrder.map(e => {
+                        return <ItemOrderCard information={e} key={e.id} />
+                    })}
 
-
-            </div>
-
-            <div className=" overflow-auto px-10 ">
-
-                <div className="flex gap-2">
-                    <p className="font-bold">Totle Prict</p>
-                    <p>${order.totalPrice}</p>
-                </div>
-                <div className="mt-2">
-                    <p className="font-bold">Choose a payment method</p>
-                    <label>
-                        <input type="radio" name="payment" value="bank"
-                            onChange={e => setPaymentMethod(e.target.value)}
-                        />
-                        Transfer from a bank account
-                    </label>
-                    <br />
-
-                    <label>
-                        <input type="radio" name="payment" value="cash"
-                            onChange={e => setPaymentMethod(e.target.value)}
-                        />
-                        Pay with cash on delivery
-                    </label>
-                    <br />
 
                 </div>
-                <div className="flex gap-5 mt-5 justify-center">
-                    <Button bg="green" onClick={handleClickOrderNow} >Order now</Button>
-                    <Button bg="red" onClick={handleClickCancleOrder} >Cancle order</Button>
+
+                <div className=" overflow-auto px-10 ">
+
+                    <div className="flex gap-2">
+                        <p className="font-bold">Totle Prict</p>
+                        <p>${order.totalPrice}</p>
+                    </div>
+                    <div className="mt-2">
+                        <p className="font-bold">Choose a payment method</p>
+                        <label>
+                            <input type="radio" name="payment" value="bank"
+                                onChange={e => setPaymentMethod(e.target.value)}
+                            />
+                            Transfer from a bank account
+                        </label>
+                        <br />
+
+                        <label>
+                            <input type="radio" name="payment" value="cash"
+                                onChange={e => setPaymentMethod(e.target.value)}
+                            />
+                            Pay with cash on delivery
+                        </label>
+                        <br />
+
+                    </div>
+                    <div className="flex gap-5 mt-5 justify-center">
+                        <Button bg="green" onClick={handleClickOrderNow} >Order now</Button>
+                        <Button bg="red" onClick={handleClickCancleOrder} >Cancle order</Button>
+                    </div>
                 </div>
-            </div>
-        </div>) : (<div className="flex flex-col justify-center items-center">
-            <p className="mb-2">You haven't added any menu yet</p>
-            <Link to={"/menu"}><Button>Check here to choose menu.</Button></Link>
-        </div>)
-    }
+            </div>) : (<div className="flex flex-col justify-center items-center">
+                <p className="mb-2">You haven't added any menu yet</p>
+                <Link to={"/menu"}><Button>Check here to choose menu.</Button></Link>
+            </div>)
+        }
     </>)
 }

@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import useOrder from "../hook/useOrder";
 import Modal from "../../../components/Modal";
 import ConfirmDelete from "./ConfirmDelete";
+import Spinner from "../../../components/Spinner";
 
 
 export default function ShowOrderInformation({ order, onClose }) {
@@ -20,6 +21,7 @@ export default function ShowOrderInformation({ order, onClose }) {
     const [isEdit, setIsEdit] = useState(false)
     const [editValue, setEditValue] = useState({})
     const [openConfirmDelete, setOpenConfirmDelete] = useState(false)
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         const getOrderItems = async () => {
@@ -76,18 +78,22 @@ export default function ShowOrderInformation({ order, onClose }) {
 
     const deleteFunction = async () => {
         try {
+            setLoading(true)
+            setOpenConfirmDelete(false)
             await deleteOrder(order.id)
             toast.success(`Deleted order number ${order.id}`)
-            setOpenConfirmDelete(false)
+
         } catch (error) {
             console.log(error)
+        } finally {
+            setLoading(false)
         }
-
     }
 
 
 
     return (<>
+        {loading && <Spinner transparent={true} />}
         <div className="flex gap-8 bg-gray-900 rounded-lg pr-5 pb-10 ">
             <div className="flex flex-col max-h-80 justify-start items-start mt-5 
             ml-5 overflow-auto scrollbar-custom min-w-[18rem] ">
