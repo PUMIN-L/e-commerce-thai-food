@@ -5,6 +5,7 @@ import validateRegister from "../varidator/validator-register";
 import { toast } from 'react-toastify'
 import authApi from "../../../apis/auth";
 import { AxiosError } from "axios";
+import Spinner from "../../../components/Spinner";
 
 const initialInput = {
     username: '',
@@ -28,6 +29,7 @@ export default function RegisterForm({ onSuccess }) {
 
     const [input, setInput] = useState(initialInput)
     const [inputError, setInputError] = useState(initialInputError)
+    const [loading, setLoading] = useState(false)
 
     const handleChangeInput = e => {
         setInput(prev => ({ ...prev, [e.target.name]: e.target.value }))
@@ -36,6 +38,7 @@ export default function RegisterForm({ onSuccess }) {
     const handleClickSubmit = async e => {
         try {
             e.preventDefault()
+            setLoading(true)
             const error = validateRegister(input)
 
             if (error) {
@@ -63,14 +66,19 @@ export default function RegisterForm({ onSuccess }) {
                     setInputError(prev => ({ ...prev, email: "Email already in use" }))
                 }
             }
+        } finally {
+            setLoading(false)
         }
+
+        return true
 
     }
 
     const classNameP = "flex justify-end w-65 m-auto font-bold text-blue-800 mr-5"
 
-    return (
-        <form onSubmit={handleClickSubmit}>
+    return (<>
+        {loading && <Spinner transparent={true} />}
+        <form onSubmit={handleClickSubmit} autoComplete="off">
             <div className="mt-5 flex flex-col">
 
                 <div className="flex mb-5">
@@ -124,5 +132,5 @@ export default function RegisterForm({ onSuccess }) {
 
             </div>
         </form>
-    )
+    </>)
 }

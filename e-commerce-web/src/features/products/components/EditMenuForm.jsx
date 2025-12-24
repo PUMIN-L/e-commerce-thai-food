@@ -69,6 +69,7 @@ export default function EditMenuForm({ onSuccess, backToSelectForm }) {
             setLoading(false)
             toast.success("Menu Updated ")
             setSelectedForEditAfterSuccess()
+            return true
 
         } catch (error) {
             console.log(error)
@@ -119,6 +120,17 @@ export default function EditMenuForm({ onSuccess, backToSelectForm }) {
                             name="categoryName"
                             onChange={handleChangeInput}
                             error={inputError.categoryName}
+                        />
+                    </div>
+
+                    <div className="flex mb-5 ">
+                        <p className={classNameP}>Food No. :</p>
+                        <Input
+                            placeholder="Input Food Number"
+                            value={product?.number}
+                            name="number"
+                            onChange={handleChangeInput}
+                            error={inputError.number}
                         />
                     </div>
 

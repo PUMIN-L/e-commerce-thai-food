@@ -6,6 +6,7 @@ import validateLogin from "../varidator/validator-login"
 import useAuth from "../../../hook/useAuth"
 import { AxiosError } from "axios"
 import { useNavigate } from "react-router-dom"
+import Spinner from "../../../components/Spinner"
 
 
 const initialInput = {
@@ -22,6 +23,7 @@ export default function LoginForm({ onSuccess }) {
 
     const [input, setInput] = useState(initialInput)
     const [inputError, setInputError] = useState(initialInputError)
+    const [loading, setLoading] = useState(false)
 
     const { login } = useAuth()
 
@@ -34,6 +36,7 @@ export default function LoginForm({ onSuccess }) {
     const handleClickSubmit = async e => {
         try {
             e.preventDefault()
+            setLoading(true)
             const error = validateLogin(input)
 
             if (error) {
@@ -47,7 +50,9 @@ export default function LoginForm({ onSuccess }) {
             navigate('/menu')
             onSuccess()
             toast.success('Registration completed successfully.');
+            return true
         } catch (error) {
+
             console.log(error)
 
             if (error instanceof AxiosError) {
@@ -61,39 +66,46 @@ export default function LoginForm({ onSuccess }) {
                     setInputError(prev => ({ ...prev, password: "Password is not correct" }))
                 }
             }
+        } finally {
+            setLoading(false)
         }
 
     }
 
     const classNameP = "w-[15rem]  m-auto font-bold text-blue-800"
 
-    return (<form onSubmit={handleClickSubmit}>
-        <div className="mt-5 flex flex-col w-[30rem] ">
-            <div className="flex mb-5 ">
-                <p className={classNameP}>Username or Email :</p>
-                <Input
-                    placeholder="Input your username or Email "
-                    value={input.usernameOrEmail}
-                    name="usernameOrEmail"
-                    onChange={handleChangeInput}
-                    error={inputError.usernameOrEmail}
-                />
-            </div>
-            <div className="flex mb-7">
-                <p className={classNameP}>Password :</p>
-                <Input
-                    placeholder="Input password"
-                    value={input.password}
-                    name="password"
-                    onChange={handleChangeInput}
-                    error={inputError.password}
-                    type={"password"}
-                />
-            </div>
+    return (
+        <>
+            {loading && <Spinner transparent={true} />}
+            <form onSubmit={handleClickSubmit} autoComplete="off">
+                <div className="mt-5 flex flex-col w-[30rem] ">
+                    <div className="flex mb-5 ">
+                        <p className={classNameP}>Username or Email :</p>
+                        <Input
+                            placeholder="Input your username or Email "
+                            value={input.usernameOrEmail}
+                            name="usernameOrEmail"
+                            onChange={handleChangeInput}
+                            error={inputError.usernameOrEmail}
+                        />
+                    </div>
+                    <div className="flex mb-7">
+                        <p className={classNameP}>Password :</p>
+                        <Input
+                            placeholder="Input password"
+                            value={input.password}
+                            name="password"
+                            onChange={handleChangeInput}
+                            error={inputError.password}
+                            type={"password"}
+                        />
+                    </div>
 
-            <Button>Login</Button>
+                    <Button>Login</Button>
 
-        </div>
+                </div>
 
-    </form>)
+            </form>
+        </>
+    )
 }

@@ -51,6 +51,7 @@ export default function FoodCardContainer() {
                                     name={e.name}
                                     price={e.price}
                                     id={e.id}
+                                    number={e.number}
                                     onClick={() => setChooseMenu(e)}
 
                                 />

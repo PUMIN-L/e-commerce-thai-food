@@ -7,6 +7,7 @@ const createProductSchema = Joi.object({
     price: Joi.string(),
     categoryName: Joi.string(),
     description: Joi.string().allow(null, ''),
+    number: Joi.string()
 })
 
 const varidateCreateProductSchema = input => validateWith(createProductSchema)(input)

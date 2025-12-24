@@ -78,7 +78,7 @@ export default function DeleteMenuForm() {
                                 src={selected.imageUrl || thaiFood}
                                 className="size-10 shrink-0 rounded-lg bg-gray-700 outline -outline-offset-1 outline-white/10"
                             />
-                            <span className="block truncate ml-2">No.{selected.id}</span>
+                            <span className="block truncate ml-2">No.{selected.number}</span>
                             <span className="block truncate">{selected.name}</span>
                         </span>
                         <ChevronUpDownIcon
@@ -109,7 +109,7 @@ export default function DeleteMenuForm() {
                                                 className="size-5 shrink-0 rounded-full outline -outline-offset-1 outline-white/10"
                                             />
                                             <span className="ml-3 block truncate font-normal group-data-selected:font-semibold">
-                                                No.{menu.id}
+                                                No.{menu.number}
                                             </span>
                                             <span className="ml-3 block truncate font-normal group-data-selected:font-semibold">
                                                 {menu.name}

@@ -13,6 +13,7 @@ export default function ProductContextProvider({ children }) {
         const fetcAllProduct = async () => {
             try {
                 const allProduct = await productApi.getAllProduct()
+
                 setAllProduct(allProduct.data)
                 setSelectedForEdit(allProduct.data[0])
             } catch (err) {

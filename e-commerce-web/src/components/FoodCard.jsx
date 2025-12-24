@@ -2,7 +2,7 @@
 import thaiFood from "../assets/thaiFood.jpg"
 
 
-export default function FoodCard({ src, name, price, id, onClick }) {
+export default function FoodCard({ src, name, price, id, onClick, number }) {
 
 
     return (
@@ -15,7 +15,7 @@ export default function FoodCard({ src, name, price, id, onClick }) {
                     <img src={src || thaiFood} alt="Food picture" />
                 </div>
                 <div className="flex justify-between p-2 px-4 font-bold ">
-                    <p className="text-white"> No.{id} </p>
+                    <p className="text-white"> No.{number} </p>
                     <p className="text-white"> {name} </p>
                     <p className="text-orange-400">${price}</p>
                 </div>

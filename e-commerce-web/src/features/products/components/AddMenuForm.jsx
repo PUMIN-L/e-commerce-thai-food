@@ -10,25 +10,29 @@ import varidateCreateProductSchema from "../../althentication/varidator/validato
 import Spinner from "../../../components/Spinner"
 import { useNavigate } from "react-router-dom";
 
-const initialInput = {
-    name: '',
-    price: '',
-    categoryName: '',
-    description: '',
-}
-
-const initialInputError = {
-    name: '',
-    price: '',
-    categoryName: '',
-    description: '',
-}
-
 export default function AddMenuForm({ onSuccess }) {
 
     const fileEl = useRef()
     const navigate = useNavigate()
-    const { createProduct } = useProduct()
+    const { createProduct, allProduct } = useProduct()
+
+
+
+    const initialInput = {
+        name: '',
+        price: '',
+        categoryName: '',
+        description: '',
+        number: '',
+    }
+
+    const initialInputError = {
+        name: '',
+        price: '',
+        categoryName: '',
+        description: '',
+        number: ''
+    }
 
     const [input, setInput] = useState(initialInput)
     const [inputError, setInputError] = useState(initialInputError)
@@ -43,10 +47,10 @@ export default function AddMenuForm({ onSuccess }) {
         try {
             e.preventDefault()
             setLoading(true)
-
             const error = varidateCreateProductSchema(input)
 
             if (error) {
+                console.log(error)
                 setInputError(error)
                 return
             }
@@ -111,6 +115,18 @@ export default function AddMenuForm({ onSuccess }) {
                         error={inputError.price}
                     />
                 </div>
+
+                <div className="flex mb-5 ">
+                    <p className={classNameP}>Food No. :</p>
+                    <Input
+                        placeholder="Input Food Number"
+                        value={input.number}
+                        name="number"
+                        onChange={handleChangeInput}
+                        error={inputError.number}
+                    />
+                </div>
+
                 <div className="flex items-center">
                     <p className={` w-28  font-bold text-blue-800`}>category :</p>
                     <div>

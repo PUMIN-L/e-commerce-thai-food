@@ -74,7 +74,7 @@ model Products {
   createAt     DateTime @default(now()) @map("create_at")
   editedAt     DateTime @updatedAt @map("edite_at")
   quantity     String?
-  number       Int
+  number       String?
 
   categories Categories? @relation(fields: [categoryName], references: [name])
 
