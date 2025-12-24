@@ -3,7 +3,7 @@ import Button from "../components/Button";
 
 export default function Homepage() {
     return (
-        <div className=" mt-36 z-10 h-[25rem] opacity-90 flex justify-center items-center 
+        <div className=" mt-36 z-10 h-[24rem] opacity-90 flex justify-center items-center 
          xl:h-[32rem] relative ">
             <div className=" absolute inset-0  overflow-hidden opacity-90  w-full  rounded-2xl">
                 <img
