@@ -16,14 +16,4 @@ axios.interceptors.request.use(
     err => Promise.reject(err)
 )
 
-
-// axios.interceptors.response.use(
-//     value => Promise.resolve(value)
-//     err => {
-//         if(err.response.status === 401) {
-
-//         }
-//     }
-// )
-
 export default axios
