@@ -54,17 +54,21 @@ export default function ShowOrderInformation({ order, onClose }) {
         options.find(opt => opt.value === value) || null;
 
     const handalClickSave = async () => {
+        try {
+            if (Object.keys(editValue).length < 1) {
+                setIsEdit(false)
+                return toast.warn("No information was changed")
+            }
 
-        if (Object.keys(editValue).length < 1) {
+            await updateOrder(order.id, editValue)
+
             setIsEdit(false)
-            return toast.warn("No information was changed")
+            setEditValue({})
+            toast.success("Information was updated")
+            return true
+        } catch (error) {
+            console.log(error)
         }
-
-        await updateOrder(order.id, editValue)
-
-        setIsEdit(false)
-        setEditValue({})
-        toast.success("Information was updated")
     }
 
 
@@ -82,7 +86,7 @@ export default function ShowOrderInformation({ order, onClose }) {
             setOpenConfirmDelete(false)
             await deleteOrder(order.id)
             toast.success(`Deleted order number ${order.id}`)
-
+            return true
         } catch (error) {
             console.log(error)
         } finally {

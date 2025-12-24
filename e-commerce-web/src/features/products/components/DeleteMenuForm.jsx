@@ -47,6 +47,7 @@ export default function DeleteMenuForm() {
             })
             setProducts(afterDelete)
             setSelected(products[0])
+            return true
         } catch (error) {
             console.log(error)
         } finally {

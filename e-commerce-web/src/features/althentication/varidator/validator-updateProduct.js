@@ -12,7 +12,8 @@ const updateProductSchema = Joi.object({
     id: Joi.number(),
     imageUrl: Joi.any(),
     publicId: Joi.string().optional(),
-    quantity: Joi.any()
+    quantity: Joi.any(),
+    number: Joi.string()
 
 })
 

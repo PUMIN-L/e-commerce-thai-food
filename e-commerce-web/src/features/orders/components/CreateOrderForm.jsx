@@ -72,6 +72,7 @@ export default function CreateOrderForm() {
             toast.success('Created Order')
             setCreateOrder([])
             navigate('/your-order')
+            return true
         } catch (error) {
             console.log(error)
         } finally {

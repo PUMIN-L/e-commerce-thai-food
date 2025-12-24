@@ -22,6 +22,7 @@ export default function PictureForm({ title, initialImage, render, onSuccess }) 
                 setLoading(true)
 
                 await updateAuthUserProfilePicture(formData)
+                return true
             }
         } catch (error) {
             console.log(error)

@@ -72,7 +72,7 @@ export default function AddMenuForm({ onSuccess }) {
             onSuccess()
             setLoading(false)
             toast.success("Created new menu")
-
+            return true
         } catch (error) {
             console.log(error)
             toast.error(error.message)

@@ -51,7 +51,7 @@ export default function RegisterForm({ onSuccess }) {
 
             onSuccess()
             toast.success('Registration completed successfully.');
-
+            return true
         } catch (error) {
 
             console.log(error)

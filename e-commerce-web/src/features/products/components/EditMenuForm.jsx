@@ -32,12 +32,13 @@ export default function EditMenuForm({ onSuccess, backToSelectForm }) {
     const [loaging, setLoading] = useState(false)
 
     const handleChangeInput = e => {
-        setProduct(prev => ({ ...prev, [e.target.name]: e.target.value }))
+        setProduct(prev => ({ ...prev, [e.target.name]: String(e.target.value) }))
     }
 
     const handleClickSave = async e => {
         try {
             e.preventDefault()
+            console.log("product web", product)
             const error = varidateUpdateProductSchema(product)
 
             if (error) {
@@ -55,7 +56,7 @@ export default function EditMenuForm({ onSuccess, backToSelectForm }) {
             }
 
             for (const key in product) {
-                if (key === 'name' || key === 'price' || key === 'categoryName') {
+                if (key === 'name' || key === 'price' || key === 'categoryName' || key === 'number') {
                     if (product[key] !== null && product[key] !== '') {
                         formData.append(key, product[key])
                     }
