@@ -1,7 +1,7 @@
 import { toast } from "react-toastify";
 import Button from "../../../components/Button";
 import useOrder from "../hook/useOrder";
-import ItemOrderCard from "./itemOrderCard";
+import ItemOrderCard from "./ItemOrderCard";
 import { Link, useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react";
 import useAuth from "../../../hook/useAuth";
@@ -14,6 +14,7 @@ export default function CreateOrderForm() {
     const navigate = useNavigate()
 
     const { authUser } = useAuth()
+
     const { createOrder, setCreateOrder, setOrdersByUser, ordersByUser } = useOrder()
 
     const orderInit = {
@@ -89,22 +90,22 @@ export default function CreateOrderForm() {
     return (<>
         {loading && <Spinner transparent={true} />}
         {
-            createOrder[0] ? (<div className="flex h-[20rem]   shadow-lg  rounded-lg">
-                <div className="  overflow-auto px-3 ">
+            createOrder[0] ? (<div className="flex flex-col-reverse shadow-lg rounded-lg w-full   h-full
+         lg:flex-row lg:h-[20rem] lg:w-auto lg:mt-0 bg-gray-200 lg:bg-white lg:p-5"
+            >
+                <div className="overflow-auto px-3 h-full  lg:mt-2 lg:ml-3 lg:max-h-none ">
                     {createOrder.map(e => {
                         return <ItemOrderCard information={e} key={e.id} />
                     })}
-
-
                 </div>
 
-                <div className=" overflow-auto px-10 ">
+                <div className=" overflow-auto px-10 mt-5 lg:mt-2 ">
 
-                    <div className="flex gap-2">
+                    <div className="flex gap-2 lg:text-lg">
                         <p className="font-bold">Totle Prict</p>
                         <p>${order.totalPrice}</p>
                     </div>
-                    <div className="mt-2">
+                    <div className="mt-2 lg:text-lg">
                         <p className="font-bold">Choose a payment method</p>
                         <label>
                             <input type="radio" name="payment" value="bank"
@@ -123,12 +124,12 @@ export default function CreateOrderForm() {
                         <br />
 
                     </div>
-                    <div className="flex gap-5 mt-5 justify-center">
+                    <div className="flex gap-5 mt-5 justify-center text-[0.9rem] pb-5 lg:text-[1.1rem] lg:pb-0">
                         <Button bg="green" onClick={handleClickOrderNow} >Order now</Button>
                         <Button bg="red" onClick={handleClickCancleOrder} >Cancle order</Button>
                     </div>
                 </div>
-            </div>) : (<div className="flex flex-col justify-center items-center">
+            </div>) : (<div className="flex flex-col justify-center items-center mt-20 lg:-mt-30 xl:-mt-30 ">
                 <p className="mb-2">You haven't added any menu yet</p>
                 <Link to={"/menu"}><Button>Check here to choose menu.</Button></Link>
             </div>)

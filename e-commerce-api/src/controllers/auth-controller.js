@@ -79,7 +79,6 @@ authController.getMe = async (req, res, next) => {
 authController.updateProfileImage = async (req, res, next) => {
 
     try {
-
         const user = await userService.findUserById(req.user.id)
 
         if (user.publicId) {

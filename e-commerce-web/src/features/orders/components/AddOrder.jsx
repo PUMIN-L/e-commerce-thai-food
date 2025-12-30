@@ -64,29 +64,49 @@ export default function AddOrder({ e, onClose }) {
     }
 
     return (<>
-        <div className="flex justify-center items-center gap-6 mt-2">
-            <div className="h-15 w-15">
+        <div className="flex flex-col justify-center items-center  mt-2 gap-1 relative 
+        lg:flex-row lg:gap-6 
+        ">
+            <div className="h-15 w-15 flex gap-5  my-2 lg:hidden relative ">
                 <img src={e?.imageUrl || thaiFood} alt="food image"
-                    className="w-full h-full object-cover  rounded-2xl" />
+                    className="  h-full object-cover absolute top-0 right-25 rounded-2xl" />
+                <div className=" absolute w-53 bottom-4 -left-6  ">
+                    <div className="flex gap-2 font-bold">
+                        <p>No.{e?.number}</p>
+                        <p>{e?.name}</p>
+                    </div>
+                    <div className="font-bold">
+                        Price: {e?.price}
+                    </div>
+                </div>
             </div>
 
-            <div>
-                <div className="flex gap-2 font-bold">
-                    <p>No.{e?.id}</p>
+            {/* For lg up */}
+            <div className="h-15 w-15 hidden lg:block">
+                <img src={e?.imageUrl || thaiFood} alt="food image"
+                    className=" w-full h-full object-cover  rounded-2xl" />
+
+            </div>
+
+            <div className="hidden lg:block">
+                <div className="flex gap-2 font-bold text-lg">
+                    <p>No.{e?.number}</p>
                     <p>{e?.name}</p>
                 </div>
-                <div className="font-bold">
+                <div className="font-bold  text-lg">
                     Price: {e?.price}
                 </div>
             </div>
+
+            {/*For lg until here */}
 
             <EditAmountOrder amount={amount} setAmount={setAmount} />
 
         </div>
 
-        <div className="flex gap-10  mt-3 justify-center">
+        <div className="flex gap-10  mt-3 justify-center ">
             {!resetButton && <Button bg="green" onClick={handleClickAddOrder}>Add Order</Button>}
-            {resetButton && <Button bg="blue" onClick={handleClickRemoveThisFood}>Remove this food</Button>}
+            {resetButton && <Button bg="blue" onClick={handleClickRemoveThisFood}>Remove</Button>}
             <Button bg="red" onClick={handleClickCancle}>Cencle</Button>
         </div>
 

@@ -5,8 +5,6 @@ import Button from "../components/Button"
 import DeleteMenuForm from "../features/products/components/DeleteMenuForm"
 import EditMenuContainer from "../features/products/components/EditMenuContainer"
 
-
-
 export default function Setting() {
 
     const [openAddMenu, setOpenAddMenu] = useState(false)
@@ -15,8 +13,8 @@ export default function Setting() {
 
     return <>
 
-        <div className="mt-36 z-10 h-[23rem] bg-black 
-        opacity-90 flex justify-center items-center flex-col gap-5 rounded-2xl xl:h-[30rem]">
+        <div className="mt-45 z-10 h-[23rem] bg-black 
+        opacity-90 flex justify-center items-center flex-col gap-5 rounded-2xl xl:h-[30rem] lg:mt-36">
 
             <div>
                 <Button
